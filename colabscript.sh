@@ -27,6 +27,8 @@ echo $OUTPUTPATH
 echo $INPUTPATH
 echo $STYLEPATH
 
+mkdir $OUTPUTPATH
+
 
 python neural-style-pt/neural_style.py -style_image $STYLEPATH -style_weight 1000 -style_scale 1 -content_image ''$INPUTPATH'' -init random -learning_rate 1 -print_iter 50 -save_iter 250 -image_size 512 -num_iterations 1000 -model_file '/content/gdrive/MyDrive/NSPT/checkpoints/nyud-fcn32s-color-heavy.pth' -content_layers relu1_1,relu2_1,relu3_1,relu4_1,relu5_1 -style_layers relu1_1,relu2_1,relu3_1,relu4_1,relu5_1 -optimizer lbfgs -output_image ''$OUTPUTPATH'/A1.png' -tv_weight 0.00001 -original_colors 0 -backend cudnn
 python neural-style-pt/neural_style.py -style_image $STYLEPATH -style_weight 1000 -style_scale 1 -content_image ''$INPUTPATH'' -content_weight 5 -init image -init_image ''$OUTPUTPATH'/A1.png' -print_iter 50 -save_iter 250 -image_size 768 -num_iterations 600 -model_file '/content/gdrive/MyDrive/NSPT/checkpoints/nyud-fcn32s-color-heavy.pth' -content_layers relu1_1,relu2_1,relu3_1,relu4_1,relu5_1 -style_layers relu1_1,relu2_1,relu3_1,relu4_1,relu5_1 -optimizer lbfgs -output_imag ''$OUTPUTPATH'/A2.png' -tv_weight 0 -gpu 0 -original_colors 0 -backend cudnn
